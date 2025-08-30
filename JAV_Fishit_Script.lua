@@ -19,11 +19,11 @@ local RemoteFolder = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("_I
 -- ======= FISHING TAB =======
 local FishingTab = Window:CreateTab("🎣 Fishing", 4483362458)
 local FishSection = FishingTab:CreateSection("Auto Fishing")
-local AutoFishing, AutoPerfect, AutoAmazing = true, true, true
+local AutoFishing, AutoPerfect, AutoAmazing = false, false, false 
 
-FishingTab:CreateToggle({ Name="Auto Fishing & Catch", CurrentValue=true, Flag="AutoFishing", Callback=function(v) AutoFishing=v end })
-FishingTab:CreateToggle({ Name="Auto Perfect", CurrentValue=true, Flag="AutoPerfect", Callback=function(v) AutoPerfect=v end })
-FishingTab:CreateToggle({ Name="Auto Amazing", CurrentValue=true, Flag="AutoAmazing", Callback=function(v) AutoAmazing=v end })
+FishingTab:CreateToggle({ Name="Auto Fishing & Catch", CurrentValue=false, Flag="AutoFishing", Callback=function(v) AutoFishing=v end })
+FishingTab:CreateToggle({ Name="Auto Perfect", CurrentValue=false, Flag="AutoPerfect", Callback=function(v) AutoPerfect=v end })
+FishingTab:CreateToggle({ Name="Auto Amazing", CurrentValue=false, Flag="AutoAmazing", Callback=function(v) AutoAmazing=v end })
 
 local FishingEvent = RemoteFolder:WaitForChild("Fishing")
 spawn(function()
@@ -56,12 +56,12 @@ end)
 -- ======= PLAYER TAB =======
 local PlayerTab = Window:CreateTab("🧍 Player", 4483362458)
 local PlayerSection = PlayerTab:CreateSection("Player Tweaks")
-local FloatWater, TradeNoDelay, InfinityJump = true,true,true 
+local FloatWater, TradeNoDelay, InfinityJump = false,false,false 
 local WalkSpeed = 16
 
-PlayerTab:CreateToggle({ Name="Float on Water", CurrentValue=true, Flag="FloatWater", Callback=function(v) FloatWater=v end })
-PlayerTab:CreateToggle({ Name="Trade No Delay", CurrentValue=true, Flag="TradeNoDelay", Callback=function(v) TradeNoDelay=v end })
-PlayerTab:CreateToggle({ Name="Infinity Jump", CurrentValue=true, Flag="InfinityJump", Callback=function(v) InfinityJump=v end })
+PlayerTab:CreateToggle({ Name="Float on Water", CurrentValue=false, Flag="FloatWater", Callback=function(v) FloatWater=v end })
+PlayerTab:CreateToggle({ Name="Trade No Delay", CurrentValue=false, Flag="TradeNoDelay", Callback=function(v) TradeNoDelay=v end })
+PlayerTab:CreateToggle({ Name="Infinity Jump", CurrentValue=false, Flag="InfinityJump", Callback=function(v) InfinityJump=v end })
 PlayerTab:CreateSlider({ Name="Walk Speed", Range={16,500}, Increment=1, Suffix="Speed", CurrentValue=16, Flag="WalkSpeed", Callback=function(v)
     WalkSpeed=v
     Character.Humanoid.WalkSpeed=v
@@ -113,8 +113,8 @@ end)
 -- ======= EVENT TAB =======
 local EventTab = Window:CreateTab("🎉 Event", 4483362458)
 local EventRemote=RemoteFolder:FindFirstChild("Event")
-local AutoFarmEvent=true
-EventTab:CreateToggle({ Name="Auto Farm Event", CurrentValue=true, Flag="AutoFarmEvent", Callback=function(v) AutoFarmEvent=v end })
+local AutoFarmEvent=false 
+EventTab:CreateToggle({ Name="Auto Farm Event", CurrentValue=false, Flag="AutoFarmEvent", Callback=function(v) AutoFarmEvent=v end })
 EventTab:CreateButton({ Name="Refresh Event List", Callback=function() pcall(function() EventRemote:FireServer("RefreshList") end) end })
 EventTab:CreateButton({ Name="Teleport to Event", Callback=function() pcall(function() EventRemote:FireServer("Teleport") end) end })
 spawn(function()
@@ -125,8 +125,8 @@ end)
 
 -- ======= SETTINGS TAB =======
 local SettingsTab = Window:CreateTab("⚙️ Settings", 4483362458)
-local AntiAFK, AntiLag=true,true
-SettingsTab:CreateToggle({ Name="Anti AFK", CurrentValue=true, Flag="AntiAFK", Callback=function(v)
+local AntiAFK, AntiLag=false,false 
+SettingsTab:CreateToggle({ Name="Anti AFK", CurrentValue=false, Flag="AntiAFK", Callback=function(v)
     AntiAFK=v
     if v then
         local vu=game:GetService("VirtualUser")
@@ -140,7 +140,7 @@ end})
 SettingsTab:CreateToggle({ Name="Anti Lag / Low Texture", CurrentValue=true, Flag="AntiLag", Callback=function(v)
     AntiLag=v
     if v then
-        game:GetService("Lighting").GlobalShadows=true
+        game:GetService("Lighting").GlobalShadows=false 
         game:GetService("Lighting").FogEnd=9e9
         for _,v in pairs(workspace:GetDescendants()) do
             if v:IsA("BasePart") then v.Material=Enum.Material.Plastic v.Reflectance=0 end
